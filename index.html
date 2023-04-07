@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* styles.css */
+body {
+  background-color: #f8f9fa;
+}
+
+.card {
+  margin-top: 30px;
+}
+
+.weather-icon {
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Weather App</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <form class="form-inline justify-content-center">
+              <input type="text" class="form-control mr-2" id="locationInput" placeholder="Enter location">
+              <button type="button" class="btn btn-primary mt-2" id="getWeatherBtn">Get Weather</button>
+            </form>
+            <div class="text-center m-auto">
+                <img src="loader-loading.gif" id="loading-spinner"
+                  style="display: none; text-align: center;">
+              </div>
+          </div>
+        </div>
+        <div class="card mt-4" id="weatherResults" style="display:none;">
+          <div class="card-body">
+            <h4 class="card-title" id="currentWeatherTitle"></h4>
+            <img src="" alt="Weather Icon" id="weatherIcon" class="weather-icon">
+            <p class="card-text" id="weatherDescription"></p>
+            <p class="card-text" id="temperature"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery and Popper.js for Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Axios for making HTTP requests -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script>
+    // script.js
+const locationInput = document.getElementById('locationInput');
+const getWeatherBtn = document.getElementById('getWeatherBtn');
+const currentWeatherTitle = document.getElementById('currentWeatherTitle');
+const weatherIcon = document.getElementById('weatherIcon');
+const weatherDescription = document.getElementById('weatherDescription');
+const temperature = document.getElementById('temperature');
+const weatherResults = document.getElementById('weatherResults');
+
+const loadingSpinner = document.getElementById("loading-spinner");
+// Function to handle enter key press
+
+
+getWeatherBtn.addEventListener('click', () => {
+  const location = locationInput.value;
+  if (location !== '') {
+    // Show loading spinner
+    loadingSpinner.style.display = "block";
+    
+    fetchWeatherData(location);
+  }
+});
+
+
+function fetchWeatherData(location) {
+  // Replace with your actual API endpoint and API key
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=685147544b82fb9574512ccba69b8a89`;
+
+  axios.get(apiUrl)
+  .then(response => {
+  // Extract data from API response
+  const weatherData = response.data;
+  const weather = weatherData.weather[0];
+  const temp = weatherData.main.temp;  // Update UI with weather data
+  currentWeatherTitle.textContent = `Current Weather in ${location}`;
+  weatherIcon.src = `http://openweathermap.org/img/w/${weather.icon}.png`;
+  weatherDescription.textContent = weather.description;
+  temperature.textContent = `Temperature: ${temp}°C`;
+
+  // Show weather results
+  weatherResults.style.display = 'block';
+  
+  loadingSpinner.style.display = "none";
+})
+.catch(error => {
+  console.error('Error fetching weather data:', error);
+  // Show error message in UI
+  currentWeatherTitle.textContent = 'Error fetching weather data';
+  weatherIcon.src = '';
+  weatherDescription.textContent = '';
+  temperature.textContent = '';
+  weatherResults.style.display = 'block';
+});
+}
+
+  </script>
+</body>
+
+</html>

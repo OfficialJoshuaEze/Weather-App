@@ -1,0 +1,116 @@
+/* Import Bootstrap CSS */
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
+
+/* Custom CSS for Weather App */
+.weather-app {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.weather-app__title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.weather-app__location {
+  margin-bottom: 20px;
+}
+
+.weather-app__location-input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+
+.weather-app__get-weather-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.weather-app__results {
+  display: none;
+  margin-top: 20px;
+}
+
+.weather-app__current-weather-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.weather-app__current-weather-info {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-app__weather-icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.weather-app__weather-description {
+  font-size: 16px;
+}
+
+.weather-app__temperature {
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: auto;
+}
+
+.weather-app__forecast-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.weather-app__forecast-list {
+  margin-top: 10px;
+}
+
+/* Responsive design using Bootstrap classes */
+@media (max-width: 576px) {
+  .weather-app__title {
+    font-size: 20px;
+  }
+
+  .weather-app__location-input {
+    font-size: 14px;
+  }
+
+  .weather-app__get-weather-btn {
+    font-size: 14px;
+  }
+
+  .weather-app__current-weather-title,
+  .weather-app__forecast-title {
+    font-size: 16px;
+  }
+
+  .weather-app__weather-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .weather-app__weather-description,
+  .weather-app__temperature {
+    font-size: 14px;
+  }
+}
